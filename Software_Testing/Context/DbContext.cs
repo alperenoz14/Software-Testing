@@ -13,7 +13,6 @@ namespace Software_Testing.Context
         {
 
         }
-
         public DbSet<Card> Cards { get; set; }
     }
 }

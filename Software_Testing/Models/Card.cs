@@ -15,7 +15,7 @@ namespace Software_Testing.Models
         public string description { get; set; }
         public string notes { get; set; }
         public DateTime dateTime { get; set; }
-        public DateTime guessedTime { get; set; }
+        public string guessedTime { get; set; }
         //now 
         //passed time since started will printed to the cardDetail
     }
