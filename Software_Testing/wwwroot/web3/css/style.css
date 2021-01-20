@@ -1,3 +1,11 @@
+.button {
+    align-content: space-around;
+    margin-top: 75px;
+    margin-left: 650px;
+    width: 500px;
+    
+}
+
 .board {
     position: relative;
     margin-left: 1%;
@@ -57,7 +65,7 @@
    the "overflow: scroll/auto" */
 .board-column-content-wrapper {
     position: relative;
-    max-height: 300px;
+    max-height: 500px;
     overflow-y: auto;
 }
 /* Never ever set "overflow: auto/scroll"

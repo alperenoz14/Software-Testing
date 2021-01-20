@@ -67,3 +67,14 @@ boardGrid = new Muuri('.board', {
     dragReleaseDuration: 400,
     dragReleaseEasing: 'ease'
 });
+
+/*window.onload = function () {
+    if (sessionStorage.getItem('.board-item'))
+        document.querySelector('.board-column-content').value = sessionStorage.getItem('.board-item');
+    document.querySelector('.board-column-content').onkeyup = function (event) {
+        if (event.keyCode == 13) {
+            sessionStorage.setItem('.board-item', document.querySelector('.board-column-content').value);
+
+        }
+    };
+};*/

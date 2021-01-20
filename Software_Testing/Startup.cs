@@ -32,6 +32,7 @@ namespace Software_Testing
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
+            services.AddSession();
             services.AddDistributedMemoryCache();
             services.AddMvc();
             var connection = @"Server=(localdb)\mssqllocaldb;Database=CardDb;Trusted_Connection=true";
@@ -52,6 +53,7 @@ namespace Software_Testing
                 app.UseHsts();
             }
 
+            app.UseSession();
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();

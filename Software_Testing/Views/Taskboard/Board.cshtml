@@ -1,4 +1,4 @@
-﻿
+﻿@model List<Card>
 @{
     Layout = null;
 }
@@ -20,11 +20,16 @@
             <div class="board-column-header">To do</div>
             <div class="board-column-content-wrapper">
                 <div class="board-column-content">
-                    <div class="board-item"><div class="board-item-content"><span>Item #</span>1</div></div>
-                    <div class="board-item"><div class="board-item-content"><span>Item #</span>2</div></div>
-                    <div class="board-item"><div class="board-item-content"><span>Item #</span>3</div></div>
-                    <div class="board-item"><div class="board-item-content"><span>Item #</span>4</div></div>
-                    <div class="board-item"><div class="board-item-content"><span>Item #</span>5</div></div>
+                    @foreach (var card in Model)
+                    {
+                        <div class="board-item">
+                            <div class="board-item-content">
+                                <span>@card.name</span>
+                                <a href="~/Taskboard/Detail/@card.ID" style="margin-left: 105px" class="btn btn-primary">Detay</a>
+                                <a href="~/Taskboard/Update/@card.ID"class="btn btn-primary">Güncelle</a>
+                            </div>
+                        </div>
+                    }
                 </div>
             </div>
         </div>
@@ -32,11 +37,13 @@
             <div class="board-column-header">Working</div>
             <div class="board-column-content-wrapper">
                 <div class="board-column-content">
-                    <div class="board-item"><div class="board-item-content"><span>Item #</span>6</div></div>
-                    <div class="board-item"><div class="board-item-content"><span>Item #</span>7</div></div>
-                    <div class="board-item"><div class="board-item-content"><span>Item #</span>8</div></div>
-                    <div class="board-item"><div class="board-item-content"><span>Item #</span>9</div></div>
-                    <div class="board-item"><div class="board-item-content"><span>Item #</span>10</div></div>
+                    <div class="board-item">
+                        <div class="board-item-content">
+                            <span>Blog sitem</span>
+                            <button style="margin-left: 105px" class="btn btn-primary">Detay</button>
+                            <button class="btn btn-primary">Güncelle</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -44,14 +51,35 @@
             <div class="board-column-header">Done</div>
             <div class="board-column-content-wrapper">
                 <div class="board-column-content">
-                    <div class="board-item"><div class="board-item-content"><span>Item #</span>11</div></div>
-                    <div class="board-item"><div class="board-item-content"><span>Item #</span>12</div></div>
-                    <div class="board-item"><div class="board-item-content"><span>Item #</span>13</div></div>
-                    <div class="board-item"><div class="board-item-content"><span>Item #</span>14</div></div>
-                    <div class="board-item"><div class="board-item-content"><span>Item #</span>15</div></div>
+                    <div class="board-item">
+                        <div class="board-item-content">
+                            <span>Blog sitem</span>
+                            <button style="margin-left: 105px" class="btn btn-primary">Detay</button>
+                            <button class="btn btn-primary">Güncelle</button>
+                        </div>
+                    </div>
+                    <div class="board-item">
+                        <div class="board-item-content">
+                            <span>Blog sitem</span>
+                            <button style="margin-left: 105px" class="btn btn-primary">Detay</button>
+                            <button class="btn btn-primary">Güncelle</button>
+                        </div>
+                    </div>
+                    <div class="board-item">
+                        <div class="board-item-content">
+                            <span>Blog sitem</span>
+                            <button style="margin-left: 105px" class="btn btn-primary">Detay</button>
+                            <button class="btn btn-primary">Güncelle</button>
+                        </div>
+                    </div>
+                </div>
                 </div>
             </div>
         </div>
+
+    </div>
+    <div class="button">
+        <a href="~/Taskboard/Card"><button style="width: 150px; height: 75px" class="btn btn-success">YENİ KART EKLE</button></a>
     </div>
     <!--Test-->
     <script type="text/javascript" src="~/web3/js/index.js" defer></script>
