@@ -13,5 +13,11 @@ namespace Software_Testing.Controllers
 
             return View();
         }
+
+        public IActionResult Card()
+        {
+
+            return View();
+        }
     }
 }
