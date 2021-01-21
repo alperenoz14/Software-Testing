@@ -11,6 +11,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Software_Testing.Context;
+using Software_Testing.Controllers;
+using Software_Testing.Models;
 
 namespace Software_Testing
 {

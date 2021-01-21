@@ -13,13 +13,15 @@ namespace Software_Testing.Controllers
     public class TaskboardController : Controller
     {
         private readonly DBContext _dbcontext;
+
+
         public TaskboardController(DBContext dBContext)
         {
             _dbcontext = dBContext;
         }
         public IActionResult Board()
         {
-            var cards = _dbcontext.Cards.OrderByDescending(x=>x.ID).ToList();
+            var cards = _dbcontext.Cards.OrderByDescending(x => x.ID).ToList();
             return View(cards);
         }
 
@@ -31,31 +33,18 @@ namespace Software_Testing.Controllers
         [HttpPost]
         public IActionResult Card(Card card)
         {
+            var service = new GuessService();
             //geçen süre hesaplanacak...
-            string s = card.description;            //açıklamadaki kelime sayısına göre süre tahminlemesi yapılır...
-            string[] coutn = s.ToString().Split(' ');
-            int i = coutn.Count();
-            if (i<=20)
-            {
-                card.guessedTime = "1-3 Gün";
-            }
-            else if(20<i && i<=40)
-            {
-                card.guessedTime = "3-5 Gün";
-            }
-            else if (40<i)
-            {
-                card.guessedTime = "5-7 Gün";
-            }
+            card.guessedTime = service.Guess(card.description);
             card.dateTime = DateTime.Now;
             _dbcontext.Add(card);
             _dbcontext.SaveChanges();
-            return RedirectToAction("Board","Taskboard");
+            return RedirectToAction("Board", "Taskboard");
         }
 
         public IActionResult Detail(int id)
         {
-            var cardDetail =  _dbcontext.Cards.Where(card => card.ID == id).ToList();
+            var cardDetail = _dbcontext.Cards.Where(card => card.ID == id).ToList();
             return View(cardDetail);
         }
 
@@ -78,6 +67,29 @@ namespace Software_Testing.Controllers
             updatedCard.notes = card.notes;
             _dbcontext.SaveChanges();
             return RedirectToAction("Board", "Taskboard");
+        }
+
+    }
+    public class GuessService
+    {
+        public string Guess(string desc)
+        {
+            string s = desc;            //açıklamadaki kelime sayısına göre süre tahminlemesi yapılır...
+            string[] coutn = s.ToString().Split(' ');
+            int i = coutn.Count();
+            if (i <= 20)
+            {
+                return "1-3 Gün";
+            }
+            else if (20 < i && i <= 40)
+            {
+                return "3-5 Gün";
+            }
+            else if (40 < i)
+            {
+                return "5-7 Gün";
+            }
+            return "";
         }
     }
 }
