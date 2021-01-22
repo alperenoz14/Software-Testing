@@ -15,31 +15,30 @@ namespace Software_Testing.Controllers
         private readonly DBContext _dbcontext;
 
 
-        public TaskboardController(DBContext dBContext)
+        public TaskboardController(DBContext dBContext)             //db bağlantısı için oluşturulan contextin dependency injection işlemi...
         {
             _dbcontext = dBContext;
         }
-        public IActionResult Board()
+        public IActionResult Board()                                //Kartların taskboarda getirildiği metod...
         {
             var cards = _dbcontext.Cards.OrderByDescending(x => x.ID).ToList();
             return View(cards);
         }
 
-        public IActionResult Card()
+        public IActionResult Card()                             //Kart ekleme ekranı get methodu...
         {
             return View();
         }
 
         [HttpPost]
-        public IActionResult Card(Card card)
+        public IActionResult Card(Card card)                    //Yeni kart eklenme işleminin yapıldığı psot metodu...
         {
             var service = new GuessService();
-            //geçen süre hesaplanacak...
-            card.guessedTime = service.Guess(card.description);
-            card.dateTime = DateTime.Now;
+            card.guessedTime = service.Guess(card.description);     //iş süresi tahminini methodunun çağırılması...
+            card.dateTime = DateTime.Now;                           //kart ekleme tarihinin eklenmesi
             _dbcontext.Add(card);
             _dbcontext.SaveChanges();
-            return RedirectToAction("Board", "Taskboard");
+            return RedirectToAction("Board", "Taskboard");          //Board sayfasına yönlendirme
         }
 
         public IActionResult Detail(int id)
@@ -49,7 +48,7 @@ namespace Software_Testing.Controllers
         }
 
         [HttpGet]
-        public IActionResult Update(int id)
+        public IActionResult Update(int id)                 //güncellenecek kartın getirildiği metod...
         {
             HttpContext.Session.SetInt32("cardId", id);
             var cardUpdate = _dbcontext.Cards.Where(card => card.ID == id).ToList();
@@ -58,7 +57,7 @@ namespace Software_Testing.Controllers
         }
 
         [HttpPost]
-        public IActionResult Update(Card card)
+        public IActionResult Update(Card card)              //kart bilgilerini güncelleme işlemini yapan post metodu...
         {
             var updatedCard = _dbcontext.Cards.Find(card.ID);
             updatedCard.name = card.name;
@@ -66,7 +65,7 @@ namespace Software_Testing.Controllers
             updatedCard.description = card.description;
             updatedCard.notes = card.notes;
             _dbcontext.SaveChanges();
-            return RedirectToAction("Board", "Taskboard");
+            return RedirectToAction("Board", "Taskboard");          //Board sayfasına yönlendirme...
         }
 
     }
@@ -74,12 +73,12 @@ namespace Software_Testing.Controllers
     {
         public string Guess(string desc)
         {
-            string s = desc;            //açıklamadaki kelime sayısına göre süre tahminlemesi yapılır...
+            string s = desc;                //açıklamadaki kelime sayısı hesaplanması...
             string[] coutn = s.ToString().Split(' ');
             int i = coutn.Count();
-            if (i <= 20)
-            {
-                return "1-3 Gün";
+            if (i <= 20)                        //açıklamadaki kelime sayısına göre iş süresi tahmini yapılır...
+            {                                       
+                return "1-3 Gün";               
             }
             else if (20 < i && i <= 40)
             {
@@ -89,7 +88,7 @@ namespace Software_Testing.Controllers
             {
                 return "5-7 Gün";
             }
-            return "";
-        }
+            return "";        }
+
     }
 }
